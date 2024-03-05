@@ -31,6 +31,8 @@ def newCard():
     elif cardNumber == 11:
         cardName = "Jack"
         cardNumber = 10
+    elif cardNumber == 1:
+        
     
     if cardSuitNum == 1:
         cardSuit = "Clubs"
@@ -57,3 +59,5 @@ while beginGame == True:
     print("Your total is:", playerTotal)
     hit = input("Do you want to hit?\nyes or no: ").lower()
     if hit == "yes":
+        newCard()
+        print("Your new card is the", cardName, "of", cardSuit)
