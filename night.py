@@ -192,9 +192,10 @@ while beginGame == True:
                 contDealerCalc= False
             elif dealerTotal == playerTotal:
                 print("Hah, snap.\nResult: Push")
+                contDealerCalc = False
             elif dealerTotal < playerTotal:
                 print("Awwww you win, ah well. Wanna play again?\nResult: Win")
-                contDealerCalc= False
+                contDealerCalc = False
         
         else:
             print("error: unfinished")
