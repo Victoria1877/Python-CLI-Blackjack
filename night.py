@@ -85,11 +85,11 @@ while beginGame == True:
     
     ## Creates the player's starting hand
     newCard()
-    print("Your first card is the", cardName, "of", cardSuit)
+    print("\nYour first card is the", cardName, "of", cardSuit)
     firstCardNum = cardNumber
     firstCardSuit = cardSuit
     newCard()
-    print("Your second card is the", cardName, "of", cardSuit, "\n\n")
+    print("Your second card is the", cardName, "of", cardSuit, "\n")
     secondCardNum = cardNumber
     secondCardSuit = cardSuit
 
@@ -189,13 +189,16 @@ while beginGame == True:
             if dealerTotal > playerTotal:
                 print("A-hah I win. Shall we play another?\nResult: Loss")
                 contDealerCalc= False
+            if dealerTotal == playerTotal:
+                print("Hah, snap.\nResult: Push")
             else:
                 print("Awwww you win, ah well. Wanna play again?\nResult: Win")
                 contDealerCalc= False
+        
         else:
             print("error: unfinished")
             contDealerCalc= False
-        print("Your score:", playerTotal, "Dealer Score:", dealerTotal)
+    print("Your score:", playerTotal, "Dealer Score:", dealerTotal)
     
 
     ## Repeat the beginGame loop
@@ -203,6 +206,7 @@ while beginGame == True:
     playAgain = input("y or n: ")
     if playAgain == "y":
         beginGame = True
+        print("Yayyyy, let's get going then!\n")
     elif playAgain =="n":
         beginGame = False
     else:
