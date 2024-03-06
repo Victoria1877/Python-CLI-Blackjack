@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import random
 import time
 
@@ -81,7 +82,6 @@ while beginGame == True:
     beginGame = False
     cardsDrawn = []
     playerTotal = 0
-    print(cardsDrawn)
     
     ## Creates the player's starting hand
     newCard()
