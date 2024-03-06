@@ -190,9 +190,9 @@ while beginGame == True:
             if dealerTotal > playerTotal:
                 print("A-hah I win. Shall we play another?\nResult: Loss")
                 contDealerCalc= False
-            if dealerTotal == playerTotal:
+            elif dealerTotal == playerTotal:
                 print("Hah, snap.\nResult: Push")
-            else:
+            elif dealerTotal < playerTotal:
                 print("Awwww you win, ah well. Wanna play again?\nResult: Win")
                 contDealerCalc= False
         
