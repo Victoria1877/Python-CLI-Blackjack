@@ -133,6 +133,7 @@ while beginGame == True:
             else:
                 print("I'll take that as a no. Lets move onto my hand./n")
                 hit = False
+                time.sleep(3.0)
 
     ## Creates the dealer's starting hand
     newCard()
