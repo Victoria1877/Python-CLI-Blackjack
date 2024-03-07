@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
 import random
 import time
 
 ## Creates a list for the cards drawn to prevent double ups
 cardsDrawn = []
 
-print("\nWelcome to Victoria's Simple BJ.\nA Simple Command Line Blackjack Game\n")
+print("\nWelcome to Simple BJ.\nA Simple Command Line Blackjack Game\n")
 
 play = input("Would you like to play a hand?\ny or n: ").lower()
 
