@@ -3,19 +3,23 @@ import time
 
 ## Creates a list for the cards drawn to prevent double ups
 cardsDrawn = []
+wins = 0
+losses = 0
 
-print("\nWelcome to Simple BJ.\nA Simple Command Line Blackjack Game\n")
+print("\nWelcome to Victoria's Simple BJ.\nA Simple Command Line Blackjack Game\n")
 
 play = input("Would you like to play a hand?\ny or n: ").lower()
 
-if play == "yes" or "y":
+if play == "y":
     beginGame = True
     print("Yay, lets play :3\nThe rules are dealer draws to 16 and stands on all 17s.\n\n")
-elif play == "no" or "n":
+elif play == "n":
     print("All good, see you later.")
+    time.sleep(5)
     quit()
 else:
     print("I'll take that as a no, Byeee")
+    time.sleep(5)
     quit()
 
 def newCard():
@@ -79,18 +83,24 @@ def newCard():
 ## Main Gameplay Loop
 while beginGame == True:
     beginGame = False
+    playerHasAce = False
     cardsDrawn = []
     playerTotal = 0
+
     
     ## Creates the player's starting hand
     newCard()
     print("\nYour first card is the", cardName, "of", cardSuit)
     firstCardNum = cardNumber
     firstCardSuit = cardSuit
+    if cardNumber == 11:
+        playerHasAce = True
     newCard()
     print("Your second card is the", cardName, "of", cardSuit, "\n")
     secondCardNum = cardNumber
     secondCardSuit = cardSuit
+    if cardNumber == 11:
+        playerHasAce = True
 
     ## Calculates the players total and asks if they want to hit (if applicable)
     playerTotal = firstCardNum + secondCardNum
@@ -114,10 +124,26 @@ while beginGame == True:
     while hit == True:
         newCard()
         playerTotal = playerTotal + cardNumber
+        if cardNumber == 11:
+            playerHasAce = True
         print("\nYour new card is the", cardName, "of", cardSuit)
-        if playerTotal > 21:
+        if playerTotal > 21 and playerHasAce == False:
             print("Bust!,", playerTotal, "better hope I bust too.\n")   
-            hit = False 
+            hit = False
+        if playerTotal > 21 and playerHasAce == True:
+            playerTotal -= 10
+            print("Uh oh, your ace must be a 1 or you'll bust.")
+            print("Your new total is:", playerTotal)
+            hitAgain = input("Hit again? \ny or n: ").lower()
+            if hitAgain == "y":
+                hit = True
+            elif hitAgain == "n":
+                print("Ok lets move on to my hand.\n")
+                hit = False
+            else:
+                print("I'll take that as a no. Lets move onto my hand./n")
+                hit = False
+                time.sleep(3.0)
         if playerTotal == 21:
             print("Well played you've hit 21. I better get lucky if I don't want to lose.\nNow let's move to my hand.\n")
             hit = False
@@ -140,7 +166,7 @@ while beginGame == True:
     dealerFirstCardNum = cardNumber
     dealerFirstCardSuit = cardSuit
     newCard()
-    print("My second card is the", cardName, "of", cardSuit, "\n\n")
+    print("My second card is the", cardName, "of", cardSuit, "\n")
     dealerSecondCardNum = cardNumber
     dealerSecondCardSuit = cardSuit
 
@@ -161,11 +187,12 @@ while beginGame == True:
         elif dealerTotal == 21 and playerTotal != 21:
             print("Yayyy, I win with 21.\nResult: Loss")
             contDealerCalc= False
+            losses += 1
 
         ## Dealer is under 17 (hit)
         elif dealerTotal <= 16:
                 newCard()
-                print("My new card is the", cardName, "of", cardSuit, "\n\n")
+                print("My new card is the", cardName, "of", cardSuit,)
                 dealerTotal = dealerTotal + cardNumber
                 print("My new total is:", dealerTotal)
 
@@ -173,11 +200,13 @@ while beginGame == True:
         elif dealerTotal > 21 and playerTotal <= 21:
             print("I'm Bust, you win. Well played.\nResult: Win")
             contDealerCalc= False
+            wins += 1
 
         ## player goes bust dealer doesn't
         elif 17 <= dealerTotal < 21 and playerTotal > 21:
             print("A-hah you're bust and i'm not, unfortunate for you.\nResult: Loss")
             contDealerCalc= False
+            losses += 1
 
         ## Dealer and Player go bust
         elif dealerTotal > 21 and playerTotal > 21:
@@ -188,6 +217,7 @@ while beginGame == True:
         elif dealerTotal >= 17 < 21:
             if dealerTotal > playerTotal:
                 print("A-hah I win. Shall we play another?\nResult: Loss")
+                losses += 1
                 contDealerCalc= False
             elif dealerTotal == playerTotal:
                 print("Hah, snap.\nResult: Push")
@@ -195,11 +225,13 @@ while beginGame == True:
             elif dealerTotal < playerTotal:
                 print("Awwww you win, ah well. Wanna play again?\nResult: Win")
                 contDealerCalc = False
+                wins += 1
         
         else:
             print("error: unfinished")
             contDealerCalc= False
     print("Your score:", playerTotal, "Dealer Score:", dealerTotal)
+    print("That Makes", wins, "Wins and", losses, "Losses")
     
 
     ## Repeat the beginGame loop
@@ -210,5 +242,6 @@ while beginGame == True:
         print("Yayyyy, let's get going then!\n")
     elif playAgain =="n":
         beginGame = False
+        time.sleep(5)
     else:
         print("I'll take that as a no. I'll see you next time.")
